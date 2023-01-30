@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recorder", "Recorder.csproj", "{AD15DF1C-2375-43D8-BA3F-AD5F97427DAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recorder2", "..\Recorder2\Recorder2.csproj", "{7B8BB0B7-1A85-41FE-ADB7-F6FEF37F71C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recorder3", "..\Recorder3\Recorder3.csproj", "{DF1D3E45-5582-4F9B-964F-E57209F2D13C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD15DF1C-2375-43D8-BA3F-AD5F97427DAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD15DF1C-2375-43D8-BA3F-AD5F97427DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD15DF1C-2375-43D8-BA3F-AD5F97427DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD15DF1C-2375-43D8-BA3F-AD5F97427DAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B8BB0B7-1A85-41FE-ADB7-F6FEF37F71C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B8BB0B7-1A85-41FE-ADB7-F6FEF37F71C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B8BB0B7-1A85-41FE-ADB7-F6FEF37F71C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B8BB0B7-1A85-41FE-ADB7-F6FEF37F71C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF1D3E45-5582-4F9B-964F-E57209F2D13C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF1D3E45-5582-4F9B-964F-E57209F2D13C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF1D3E45-5582-4F9B-964F-E57209F2D13C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF1D3E45-5582-4F9B-964F-E57209F2D13C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E526E979-A596-4974-A387-7B30CA79E289}
+	EndGlobalSection
+EndGlobal
