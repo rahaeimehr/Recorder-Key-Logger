@@ -3,10 +3,9 @@ using System.IO;
 
 namespace Recorder
 {
-    public partial class Form1 : Form
+    public partial class fMain : Form
     {
         string datasetFolderPath ="";
-        string audioFileName = "";
         string fileID = "";
         const int RECORD_PERIOD = 5;
         const int NOISE_PERIOD = 2;
@@ -15,7 +14,7 @@ namespace Recorder
         private static extern int record(string lpstrCommand, string lpstrReturnString, int uReturnLength, int hwndCallback);
 
         int countdown,recordPeriod;
-        public Form1()
+        public fMain()
         {
             Microsoft.VisualBasic.Devices.Audio a = new Microsoft.VisualBasic.Devices.Audio();
             
@@ -43,12 +42,15 @@ namespace Recorder
             countdown = NOISE_PERIOD;
             label1.Text = $"{countdown}";
             record("open new Type waveaudio Alias recsound", "", 0, 0);
-
             record("record recsound", "", 0, 0);
             label1.Visible = true;
             textBox1.Enabled = false;
             textBox1.Text = "";
             tmr_countdown.Enabled = true;
+        }
+        public void addMessage(string s)
+        {
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -60,10 +62,7 @@ namespace Recorder
                 timer1.Stop();
                 timer1.Enabled = false;
                 textBox1.Enabled = false;
-                string tmp = $"save recsound '{datasetFolderPath}{DateTime.Now.Ticks}_{fileID}.wav'";
-                //tmp = "save recsound d:\\1.wav";
-                //tmp = "save recsound \"D:\\Augusta University\\research\\Acoustic Side Channel Attack\\Recorder\\Recorder\\bin\\Debug\\net6.0-windows\\dataset\\638104427825170780_010115.wav'";
-                textBox2.Text = tmp;
+                string tmp = $"save recsound \"{datasetFolderPath}{DateTime.Now.Ticks}_{fileID}.wav\"";
                 record(tmp, "", 0, 0);
                 record("close recsound", "", 0, 0);
                 MessageBox.Show("done");
@@ -72,12 +71,6 @@ namespace Recorder
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            label2.Text = DateTime.Now.Ticks.ToString();
-            
-            if (Control.ModifierKeys != Keys.None)
-            {
-                label2.Text = Control.ModifierKeys.ToString();
-            } 
                
             
         }
