@@ -16,7 +16,14 @@ namespace Recorder
             ApplicationConfiguration.Initialize();
             fm = new fMain();
             Application.AddMessageFilter(new KeyPressFilter());
-            Application.Run(new fMain());
+            try
+            {
+                Application.Run(fm);
+            }
+            catch
+            {
+
+            }
         }
         private class KeyPressFilter : IMessageFilter
         {
@@ -25,12 +32,11 @@ namespace Recorder
 
                 if (m.Msg == 0x100 && ((int)m.LParam & 0x40000000) == 0)
                 {
-                    Control.IsKeyLocked(Keys.CapsLock);
-                    fm.addMessage($"Down = {m.WParam}, {((int)m.LParam & 0xFFFF0000) >> 16}");
+                    fm.registerKeyEvent(DateTime.Now.Ticks, KeyEventType.KeyPressed, m.WParam, m.LParam);
                 }
                 if (m.Msg == 0x101)
                 {
-                    fm.addMessage($"Up = {m.WParam}");
+                    fm.registerKeyEvent(DateTime.Now.Ticks, KeyEventType.KeyReleased, m.WParam, m.LParam);
                 }
 
                 return false;

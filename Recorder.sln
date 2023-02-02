@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recorder", "Recorder.csproj", "{AD15DF1C-2375-43D8-BA3F-AD5F97427DAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recorder", "Recorder.csproj", "{AD15DF1C-2375-43D8-BA3F-AD5F97427DAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recorder2", "..\Recorder2\Recorder2.csproj", "{7B8BB0B7-1A85-41FE-ADB7-F6FEF37F71C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recorder2", "..\Recorder2\Recorder2.csproj", "{7B8BB0B7-1A85-41FE-ADB7-F6FEF37F71C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recorder3", "..\Recorder3\Recorder3.csproj", "{DF1D3E45-5582-4F9B-964F-E57209F2D13C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recorder3", "..\Recorder3\Recorder3.csproj", "{DF1D3E45-5582-4F9B-964F-E57209F2D13C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
