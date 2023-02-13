@@ -1,4 +1,14 @@
-﻿namespace Recorder
+﻿using System.Runtime.InteropServices;
+using System.IO;
+using System.Windows.Forms;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+namespace Recorder
 {
     partial class fUserInfo
     {
@@ -43,36 +53,37 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 22);
+            this.label1.Location = new System.Drawing.Point(38, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 15);
+            this.label1.Size = new System.Drawing.Size(52, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(309, 22);
+            this.label2.Location = new System.Drawing.Point(353, 29);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 15);
+            this.label2.Size = new System.Drawing.Size(76, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Keyboard:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(35, 64);
+            this.label3.Location = new System.Drawing.Point(40, 85);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 15);
+            this.label3.Size = new System.Drawing.Size(92, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Typing Style:";
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(60, 90);
+            this.radioButton1.Location = new System.Drawing.Point(69, 120);
+            this.radioButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(458, 19);
+            this.radioButton1.Size = new System.Drawing.Size(572, 24);
             this.radioButton1.TabIndex = 2;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Touch typing: where the typist looks at the screen and uses all their fingers to " +
@@ -83,9 +94,10 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(60, 114);
+            this.radioButton2.Location = new System.Drawing.Point(69, 152);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(512, 19);
+            this.radioButton2.Size = new System.Drawing.Size(640, 24);
             this.radioButton2.TabIndex = 3;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Hunt-and-peck: where the typist looks at the keyboard and uses one or a few finge" +
@@ -96,9 +108,10 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(60, 139);
+            this.radioButton3.Location = new System.Drawing.Point(69, 185);
+            this.radioButton3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(477, 19);
+            this.radioButton3.Size = new System.Drawing.Size(597, 24);
             this.radioButton3.TabIndex = 4;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "Two-fingered typing: where the typist looks at the screen and uses two fingers to" +
@@ -109,9 +122,10 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(60, 164);
+            this.radioButton4.Location = new System.Drawing.Point(69, 219);
+            this.radioButton4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(55, 19);
+            this.radioButton4.Size = new System.Drawing.Size(67, 24);
             this.radioButton4.TabIndex = 5;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = "Other";
@@ -120,23 +134,26 @@
             // 
             // tName
             // 
-            this.tName.Location = new System.Drawing.Point(98, 19);
+            this.tName.Location = new System.Drawing.Point(112, 25);
+            this.tName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tName.Name = "tName";
-            this.tName.Size = new System.Drawing.Size(171, 23);
+            this.tName.Size = new System.Drawing.Size(195, 27);
             this.tName.TabIndex = 0;
             // 
             // tKeyboard
             // 
-            this.tKeyboard.Location = new System.Drawing.Point(375, 19);
+            this.tKeyboard.Location = new System.Drawing.Point(429, 25);
+            this.tKeyboard.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tKeyboard.Name = "tKeyboard";
-            this.tKeyboard.Size = new System.Drawing.Size(171, 23);
+            this.tKeyboard.Size = new System.Drawing.Size(195, 27);
             this.tKeyboard.TabIndex = 1;
             // 
             // btn_SaveUserInfo
             // 
-            this.btn_SaveUserInfo.Location = new System.Drawing.Point(248, 213);
+            this.btn_SaveUserInfo.Location = new System.Drawing.Point(283, 284);
+            this.btn_SaveUserInfo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btn_SaveUserInfo.Name = "btn_SaveUserInfo";
-            this.btn_SaveUserInfo.Size = new System.Drawing.Size(130, 23);
+            this.btn_SaveUserInfo.Size = new System.Drawing.Size(149, 31);
             this.btn_SaveUserInfo.TabIndex = 6;
             this.btn_SaveUserInfo.Text = "Continue ...";
             this.btn_SaveUserInfo.UseVisualStyleBackColor = true;
@@ -145,9 +162,9 @@
             // fUserInfo
             // 
             this.AcceptButton = this.btn_SaveUserInfo;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(626, 262);
+            this.ClientSize = new System.Drawing.Size(715, 386);
             this.ControlBox = false;
             this.Controls.Add(this.btn_SaveUserInfo);
             this.Controls.Add(this.tKeyboard);
@@ -160,6 +177,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "fUserInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Participant Info";

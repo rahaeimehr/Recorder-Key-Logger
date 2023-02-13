@@ -1,4 +1,14 @@
+using System.Runtime.InteropServices;
+using System.IO;
 using System.Windows.Forms;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace Recorder
 {
     internal static class Program
@@ -13,7 +23,7 @@ namespace Recorder
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
+            //ApplicationConfiguration.Initialize();
             fm = new fMain();
             Application.AddMessageFilter(new KeyPressFilter());
             try
