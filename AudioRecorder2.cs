@@ -2,56 +2,50 @@
 using System.IO;
 using System.Windows.Forms;
 using NAudio.Wave;
-
 namespace Recorder
 { 
-    class AudioRecorder
+    class AudioRecorder2
     {
         private WaveInEvent waveIn;
-        private MemoryStream memoryStream;
-
-    public AudioRecorder()
+        private WaveFileWriter writer;
+        public void StartRecording(string fileName, string folder)
         {
-
+            // Check if the specified folder exists
+            if (!Directory.Exists(folder))
+            {
+                MessageBox.Show("The specified folder does not exist.");
+                return;
+            }
+            // Create a new WaveInEvent to record audio
             waveIn = new WaveInEvent();
             waveIn.DeviceNumber = 0;
             waveIn.WaveFormat = new WaveFormat(44100, WaveIn.GetCapabilities(0).Channels);
             waveIn.DataAvailable += OnDataAvailable;
             waveIn.RecordingStopped += OnRecordingStopped;
-            memoryStream = new MemoryStream();
-
-            // Create a new WaveInEvent to record audio
-
             // Create a new WaveFileWriter to save the audio
-        }
-        public void StartRecording()
-        {
-            // Check if the specified folder exists
+            string filePath = Path.Combine(folder, fileName);
+            writer = new WaveFileWriter(filePath, waveIn.WaveFormat);
             // Start recording
             waveIn.StartRecording();
         }
-
-        public void StopRecording(string fileAddr)
+        public void StopRecording()
         {
             // Stop recording and dispose of the WaveInEvent and WaveFileWriter
             waveIn.StopRecording();
             waveIn.Dispose();
-            WaveFileWriter writer = new WaveFileWriter(fileAddr, waveIn.WaveFormat);
-            writer.Write(memoryStream.ToArray(),0,(int)memoryStream.Length);
-            writer.Close();
-            memoryStream.Dispose();
+            waveIn = null;
+            writer.Dispose();
+            writer = null;
         }
-
         private void OnDataAvailable(object sender, WaveInEventArgs e)
         {
-            // Write the recorded audio data to the WaveFileWriter            
-            memoryStream.Write(e.Buffer, 0, e.BytesRecorded);
+            // Write the recorded audio data to the WaveFileWriter
+            writer.Write(e.Buffer, 0, e.BytesRecorded);
         }
-
         private void OnRecordingStopped(object sender, StoppedEventArgs e)
         {
             // Dispose of the WaveInEvent and WaveFileWriter
-            waveIn.Dispose();
         }
     }
 }
+

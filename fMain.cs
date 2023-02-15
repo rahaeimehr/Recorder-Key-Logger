@@ -14,8 +14,8 @@ namespace Recorder
     public partial class fMain : Form
     {
         string datasetFolderPath ="";
-        const int RECORD_PERIOD = 60;
-        const int NOISE_PERIOD = 5;
+        const int RECORD_PERIOD = 5;
+        const int NOISE_PERIOD = 2;
         string[] fileNames = {"random" , "text" , "words" };
         string eventsDetail = "";
         long baseTick = 0;
@@ -23,15 +23,13 @@ namespace Recorder
         string[] sentences;
         int wordCounter = 0;
         string[] words;
+        private AudioRecorder audioRecorder;
 
         private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
         private const int WM_APPCOMMAND = 0x319;
         [DllImport("user32.dll")]
 
         public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
-
-        [DllImport("winmm.dll", EntryPoint = "mciSendStringA", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
-        private static extern int record(string lpstrCommand, string lpstrReturnString, int uReturnLength, int hwndCallback);
 
         int countdown,recordPeriod;
         fUserInfo userInfo;
@@ -42,7 +40,8 @@ namespace Recorder
             InitializeComponent();
 
             datasetFolderPath =  AppDomain.CurrentDomain.BaseDirectory + @"dataset\";
-
+            sentences = File.ReadAllLines("text.txt");
+            words = File.ReadAllLines("words.txt");
             Random r = new Random();
             if (!Directory.Exists(datasetFolderPath))
             {
@@ -63,6 +62,7 @@ namespace Recorder
             msg += "\nKeyboard:" + userInfo.info.Keyboard;
             msg += "\nStyle:" + userInfo.info.TypingStyle;
             File.WriteAllText($"{datasetFolderPath}info.txt", msg);
+
         }
 
         public void registerKeyEvent(long ticks, KeyEventType e, IntPtr wCode, IntPtr lCode)
@@ -106,9 +106,7 @@ namespace Recorder
                 tmr_recording.Stop();
                 tmr_recording.Enabled = false;
                 tTypeArea.Enabled = false;
-                string tmp = $"save recsound \"{datasetFolderPath}{fileNames[0]}.wav\"";
-                record(tmp, "", 0, 0);
-                record("close recsound", "", 0, 0);
+                audioRecorder.StopRecording($"{datasetFolderPath}{fileNames[0]}.wav");
                 File.WriteAllText($"{datasetFolderPath}{fileNames[0]}.txt",eventsDetail);
                 MessageBox.Show("Thanks! Let's do the next experiment!");
                 tabControl1.SelectedTab = tpText;
@@ -126,20 +124,9 @@ namespace Recorder
             eventsDetail = "";
             lst_EventLogger.Items.Clear();
             baseTick = DateTime.Now.Ticks;
-            /*
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            var package = new ExcelPackage();             
-            var worksheet = package.Workbook.Worksheets.Add("Random Text");
-            worksheet.Cells[1, 1].Value = "Name";
-            worksheet.Cells[1, 2].Value = "Age";
-            worksheet.Cells[2, 1].Value = "John Doe";
-            worksheet.Cells[2, 2].Value = 30;
-            worksheet.Cells[3, 1].Value = "Jane Doe";
-            worksheet.Cells[3, 2].Value = 25;
-            package.SaveAs($"{fileID}.xlsx");
-            */
-            record("open new Type waveaudio Alias recsound", "", 0, 0);
-            record("record recsound", "", 0, 0);
+            audioRecorder = new AudioRecorder();
+            audioRecorder.StartRecording();
+
             tTypeArea.Enabled = false;
             tTypeArea.Text = "";
             tmr_countdown.Enabled = true;
@@ -154,10 +141,9 @@ namespace Recorder
             tTypedSentence.Focus();
             eventsDetail = "";
             lst_EventLogger.Items.Clear();
-            record("open new Type waveaudio Alias recsound", "", 0, 0);
-            record("record recsound", "", 0, 0);
+            audioRecorder = new AudioRecorder();
+            audioRecorder.StartRecording();
             baseTick = DateTime.Now.Ticks;
-            sentences = File.ReadAllLines("text.txt");
             tPromptSentence.Text = sentences[0];
             SetSentanceCounter();
             
@@ -187,9 +173,7 @@ namespace Recorder
                 }
                 else
                 {
-                    string tmp = $"save recsound \"{datasetFolderPath}{fileNames[1]}.wav\"";
-                    record(tmp, "", 0, 0);
-                    record("close recsound", "", 0, 0);
+                    audioRecorder.StopRecording($"{datasetFolderPath}{fileNames[1]}.wav");
                     File.WriteAllText($"{datasetFolderPath}{fileNames[1]}.txt", eventsDetail);
                     eventsDetail = "";
                     tTypedSentence.Enabled = false;
@@ -214,9 +198,7 @@ namespace Recorder
                 }
                 else
                 {
-                    string tmp = $"save recsound \"{datasetFolderPath}{fileNames[2]}.wav\"";
-                    record(tmp, "", 0, 0);
-                    record("close recsound", "", 0, 0);
+                    audioRecorder.StopRecording($"{datasetFolderPath}{fileNames[2]}.wav");
                     File.WriteAllText($"{datasetFolderPath}{fileNames[2]}.txt", eventsDetail);
                     eventsDetail = "";
                     tTypedWord.Enabled = false;
@@ -232,9 +214,8 @@ namespace Recorder
             btnStartWord.Enabled = false;
             eventsDetail = "";
             lst_EventLogger.Items.Clear();
-            words = File.ReadAllLines("words.txt");
-            record("open new Type waveaudio Alias recsound", "", 0, 0);
-            record("record recsound", "", 0, 0);
+            audioRecorder = new AudioRecorder();
+            audioRecorder.StartRecording();
             baseTick = DateTime.Now.Ticks;
             tPromptWord.Text = words[0];
             SetWordCounter();
