@@ -14,8 +14,7 @@ namespace Recorder
     public partial class fMain : Form
     {
         string datasetFolderPath ="";
-        const int RECORD_PERIOD = 5;
-        const int NOISE_PERIOD = 2;
+        int NOISE_PERIOD = 2;
         string[] fileNames = {"random" , "text" , "words" };
         string eventsDetail = "";
         long baseTick = 0;
@@ -31,7 +30,7 @@ namespace Recorder
 
         public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
-        int countdown,recordPeriod;
+        int countdown, recordPeriod;
         fUserInfo userInfo;
         public fMain()
         {
@@ -99,37 +98,41 @@ namespace Recorder
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            recordPeriod--;
-            lCounter.Text = $"Remaining time is {recordPeriod}";
-            if (recordPeriod == 0)
-            {
-                tmr_recording.Stop();
-                tmr_recording.Enabled = false;
-                tTypeArea.Enabled = false;
-                audioRecorder.StopRecording($"{datasetFolderPath}{fileNames[0]}.wav");
-                File.WriteAllText($"{datasetFolderPath}{fileNames[0]}.txt",eventsDetail);
-                MessageBox.Show("Thanks! Let's do the next experiment!");
-                tabControl1.SelectedTab = tpText;
-               
-            }
+            recordPeriod++;
+            lCounter.Text = $"Recording for {recordPeriod}";
         }
 
         private void btnRecording_Click(object sender, EventArgs e)
         {
-            btnRecording.Enabled = false;
-            countdown = NOISE_PERIOD;
-            lCounter.Visible = false;
-            lCounter.Text = $"{countdown}";
-            lCounter.Visible = true;
-            eventsDetail = "";
-            lst_EventLogger.Items.Clear();
-            baseTick = DateTime.Now.Ticks;
-            audioRecorder = new AudioRecorder();
-            audioRecorder.StartRecording();
+            if (recordPeriod==0)
+            {
+                btnRecording.Enabled = false;
+                countdown = NOISE_PERIOD;
+                lCounter.Visible = false;
+                lCounter.Text = $"{countdown}";
+                lCounter.Visible = true;
+                eventsDetail = "";
+                lst_EventLogger.Items.Clear();
+                baseTick = DateTime.Now.Ticks;
+                audioRecorder = new AudioRecorder();
+                audioRecorder.StartRecording();
 
-            tTypeArea.Enabled = false;
-            tTypeArea.Text = "";
-            tmr_countdown.Enabled = true;
+                tTypeArea.Enabled = false;
+                tTypeArea.Text = "";
+                tmr_countdown.Enabled = true;
+            }
+            else
+            {
+                    tmr_recording.Stop();
+                    tmr_recording.Enabled = false;
+                    tTypeArea.Enabled = false;
+                    audioRecorder.StopRecording($"{datasetFolderPath}{fileNames[0]}.wav");
+                    File.WriteAllText($"{datasetFolderPath}{fileNames[0]}.txt", eventsDetail);
+                    MessageBox.Show("Thanks! Let's do the next experiment!");
+                    tabControl1.SelectedTab = tpText;
+                    recordPeriod = 0;
+                    btnRecording.Text = "Record Again";
+            }
 
         }
 
@@ -231,8 +234,9 @@ namespace Recorder
             lCounter.Text = $"{countdown}";
             if (countdown == 0)
             {
+                btnRecording.Enabled = true;
+                btnRecording.Text = "Stop recording";
                 tmr_countdown.Enabled = false;
-                recordPeriod = RECORD_PERIOD;
                 tmr_recording.Interval = 1000;
                 tmr_recording.Enabled = true;
                 tmr_recording.Start();                
