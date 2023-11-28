@@ -34,6 +34,7 @@
             this.t_policy = new System.Windows.Forms.TextBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.btn_exit = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label2
@@ -65,11 +66,11 @@
             // 
             // t_policy
             // 
-            this.t_policy.Location = new System.Drawing.Point(37, 74);
+            this.t_policy.Location = new System.Drawing.Point(37, 88);
             this.t_policy.Multiline = true;
             this.t_policy.Name = "t_policy";
             this.t_policy.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.t_policy.Size = new System.Drawing.Size(509, 284);
+            this.t_policy.Size = new System.Drawing.Size(509, 270);
             this.t_policy.TabIndex = 7;
             // 
             // checkBox1
@@ -93,6 +94,15 @@
             this.btn_exit.UseVisualStyleBackColor = true;
             this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(39, 70);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(123, 15);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Terms and conditions:";
+            // 
             // fUserInfo
             // 
             this.AcceptButton = this.btn_SaveUserInfo;
@@ -101,6 +111,7 @@
             this.CancelButton = this.btn_exit;
             this.ClientSize = new System.Drawing.Size(583, 456);
             this.ControlBox = false;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.t_policy);
@@ -124,5 +135,6 @@
         private TextBox t_policy;
         private CheckBox checkBox1;
         private Button btn_exit;
+        private Label label1;
     }
 }
