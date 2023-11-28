@@ -57,11 +57,8 @@ namespace Recorder
             }
             SendMessageW(this.Handle, WM_APPCOMMAND, this.Handle, (IntPtr)APPCOMMAND_VOLUME_MUTE);
 
-            string msg = "Name:" + userInfo.info.UserName;
-            msg += "\nKeyboard:" + userInfo.info.Keyboard;
-            msg += "\nStyle:" + userInfo.info.TypingStyle;
+            string msg = "Keyboard:" + userInfo.info.Keyboard;
             File.WriteAllText($"{datasetFolderPath}info.txt", msg);
-
         }
 
         public void registerKeyEvent(long ticks, KeyEventType e, IntPtr wCode, IntPtr lCode)

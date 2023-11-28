@@ -15,14 +15,10 @@ namespace Recorder
     {
         public class CUserInfo
         {
-            public string UserName { get; set; }
             public string Keyboard{ get; set; }
-            public string TypingStyle{ get; set; }
             public CUserInfo()
             {
-                UserName = "";
                 Keyboard = "";
-                TypingStyle = "";
             }
         } 
         public CUserInfo info;
@@ -34,32 +30,30 @@ namespace Recorder
 
         private void btn_SaveUserInfo_Click(object sender, EventArgs e)
         {
-            info.UserName = tName.Text.Trim();
             info.Keyboard = tKeyboard.Text.Trim();
-            if ((info.UserName == "") || (info.Keyboard == "") || (info.TypingStyle == ""))
-                MessageBox.Show("Please fill the fileds!");
-            else
-                DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+
+        private void fUserInfo_Load(object sender, EventArgs e)
         {
-            info.TypingStyle = "1";
+            try
+            {
+                t_policy.Text = System.IO.File.ReadAllText("policy.txt");
+            }catch
+            {
+                MessageBox.Show("The policy file is missed.");
+            }
         }
 
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        private void btn_exit_Click(object sender, EventArgs e)
         {
-            info.TypingStyle = "2";
+            DialogResult = DialogResult.Cancel;
         }
 
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            info.TypingStyle = "3";
-        }
-
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-            info.TypingStyle = "4";
+            btn_SaveUserInfo.Enabled = checkBox1.Checked;
         }
     }
 }
