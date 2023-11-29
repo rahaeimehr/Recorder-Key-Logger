@@ -103,7 +103,6 @@
             this.lCounter.Size = new System.Drawing.Size(97, 15);
             this.lCounter.TabIndex = 1;
             this.lCounter.Text = "Get ready to type";
-            this.lCounter.Visible = false;
             // 
             // tmr_countdown
             // 
@@ -262,9 +261,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(8, 31);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(189, 15);
+            this.label4.Size = new System.Drawing.Size(209, 15);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Press Enter after typing each word.";
+            this.label4.Text = "Press Enter after typing each sentence.";
             // 
             // label3
             // 

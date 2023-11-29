@@ -14,7 +14,6 @@ namespace Recorder
     public partial class fMain : Form
     {
         string datasetFolderPath ="";
-        int NOISE_PERIOD = 2;
         string[] fileNames = {"random" , "text" , "words" };
         string eventsDetail = "";
         long baseTick = 0;
@@ -104,19 +103,24 @@ namespace Recorder
             if (recordPeriod==0)
             {
                 btnRecording.Enabled = false;
-                countdown = NOISE_PERIOD;
-                lCounter.Visible = false;
-                lCounter.Text = $"{countdown}";
-                lCounter.Visible = true;
+                //countdown = NOISE_PERIOD;
                 eventsDetail = "";
                 lst_EventLogger.Items.Clear();
                 baseTick = DateTime.Now.Ticks;
                 audioRecorder = new AudioRecorder();
                 audioRecorder.StartRecording();
-
                 tTypeArea.Enabled = false;
                 tTypeArea.Text = "";
-                tmr_countdown.Enabled = true;
+                fWait fm = new fWait();
+                fm.ShowDialog();
+
+                btnRecording.Enabled = true;
+                btnRecording.Text = "Stop recording";
+                tmr_recording.Interval = 1000;
+                tmr_recording.Enabled = true;
+                tmr_recording.Start();
+                tTypeArea.Enabled = true;
+                tTypeArea.Focus();
             }
             else
             {
@@ -145,6 +149,8 @@ namespace Recorder
             audioRecorder.StartRecording();
             baseTick = DateTime.Now.Ticks;
             tPromptSentence.Text = sentences[0];
+            fWait fm = new fWait();
+            fm.ShowDialog();
             SetSentanceCounter();
             
 
@@ -219,6 +225,8 @@ namespace Recorder
             baseTick = DateTime.Now.Ticks;
             tPromptWord.Text = words[0];
             SetWordCounter();
+            fWait fm = new fWait();
+            fm.ShowDialog();
             wordCounter = 0;
             tTypedWord.Enabled = true;
             tTypedWord.Text = "";
