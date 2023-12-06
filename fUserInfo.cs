@@ -51,9 +51,10 @@ namespace Recorder
             DialogResult = DialogResult.Cancel;
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+
+        private void r_agree_CheckedChanged(object sender, EventArgs e)
         {
-            btn_SaveUserInfo.Enabled = checkBox1.Checked;
+            btn_SaveUserInfo.Enabled = r_agree.Checked;
         }
     }
 }

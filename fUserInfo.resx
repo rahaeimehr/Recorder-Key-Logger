@@ -57,4 +57,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Clicking on the "agree" button below indicates that: 
+• you have read the above information
+• you voluntarily agree to participate
+• you are at least 18 years of age 
+If you do not wish to participate in the research study, please decline participation by clicking on the "disagree" button.</value>
+  </data>
 </root>
